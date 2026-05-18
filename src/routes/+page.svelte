@@ -6,17 +6,17 @@
 		todos = JSON.parse(localStorage.getItem("todos") ?? "[]");
 	});
 
-	function addTodo () {
+	function addTodo() {
 		const todo = this.value;
 		if (todo === "") return;
 		todos.push(todo);
 		localStorage.setItem("todos", JSON.stringify(todos));
 		this.value = "";
-	};
-	function removeTodo () {
+	}
+	function removeTodo() {
 		todos.splice(this.index, 1);
 		localStorage.setItem("todos", JSON.stringify(todos));
-	};
+	}
 </script>
 
 <main>
