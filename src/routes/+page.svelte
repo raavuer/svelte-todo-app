@@ -1,5 +1,10 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+
 	let todos: string[] = $state([]);
+  onMount(() => {
+    todos = JSON.parse(localStorage.getItem("todos") || "[]");
+  });
 </script>
 
 <main>
@@ -9,6 +14,7 @@
 		type="text"
 		onchange={function () {
 			todos.push(this.value);
+      localStorage.setItem("todos", JSON.stringify(todos));
 		}}
 	/>
 
