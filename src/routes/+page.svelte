@@ -5,32 +5,30 @@
 	onMount(() => {
 		todos = JSON.parse(localStorage.getItem("todos") ?? "[]");
 	});
+
+	function addTodo () {
+		const todo = this.value;
+		if (todo === "") return;
+		todos.push(todo);
+		localStorage.setItem("todos", JSON.stringify(todos));
+		this.value = "";
+	};
+	function removeTodo () {
+		todos.splice(this.index, 1);
+		localStorage.setItem("todos", JSON.stringify(todos));
+	};
 </script>
 
 <main>
 	<h1>Todo List</h1>
 
-	<input
-		type="text"
-		onchange={function () {
-			const todo = this.value;
-			if (todo === "") return;
-			todos.push(todo);
-			localStorage.setItem("todos", JSON.stringify(todos));
-		}}
-	/>
+	<input type="text" onchange={addTodo} />
 
 	<ul>
 		{#each todos as todo, index (index)}
 			<li>
-				<button
-					type="button"
-					onclick={function () {
-						todos.splice(index, 1);
-						localStorage.setItem("todos", JSON.stringify(todos));
-					}}>X</button
-				>
-				{todo}
+				<button type="button" onclick={removeTodo}>X</button>
+				<span>{todo}</span>
 			</li>
 		{/each}
 	</ul>
