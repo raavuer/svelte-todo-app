@@ -2,9 +2,9 @@
 	import { onMount } from "svelte";
 
 	let todos: string[] = $state([]);
-  onMount(() => {
-    todos = JSON.parse(localStorage.getItem("todos") || "[]");
-  });
+	onMount(() => {
+		todos = JSON.parse(localStorage.getItem("todos") ?? "[]");
+	});
 </script>
 
 <main>
@@ -13,8 +13,10 @@
 	<input
 		type="text"
 		onchange={function () {
-			todos.push(this.value);
-      localStorage.setItem("todos", JSON.stringify(todos));
+			const todo = this.value;
+			if (todo === "") return;
+			todos.push(todo);
+			localStorage.setItem("todos", JSON.stringify(todos));
 		}}
 	/>
 
@@ -29,6 +31,6 @@
 	main {
 		display: grid;
 		place-items: center;
-		font-family: system-ui, 'Segoe UI', Oxygen, 'Open Sans', sans-serif;
+		font-family: system-ui, "Segoe UI", Oxygen, "Open Sans", sans-serif;
 	}
 </style>
