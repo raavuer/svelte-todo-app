@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte";
 
 	let todos = $state([]);
@@ -41,32 +41,38 @@
 		place-items: center;
 
 		font:
-			2rem system-ui,
+			1.5rem system-ui,
 			"Segoe UI",
 			Oxygen,
 			"Open Sans",
 			sans-serif;
 	}
-	h1 {
-		font-size: 2em;
-	}
 	input {
 		font-size: 1em;
-		padding: 1rem 2rem;
-		border-radius: 16px;
+		padding: 1rem;
+		border-radius: 1em;
 	}
 	li {
 		display: grid;
 		grid-template-columns: 2rem 1fr;
+		align-content: space-between;
 		gap: 8px;
 		padding: 8px;
 		list-style-type: none;
 
 		animation-name: slide-in;
+		animation-delay: calc(250ms * sibling-index());
 		animation-duration: 500ms;
+	}
+	li:hover > span {
+		text-decoration: underline;
 	}
 	button {
 		border-radius: 16px;
+	}
+	button:hover {
+		border-color: maroon;
+		background-color: crimson;
 	}
 	@keyframes slide-in {
 		from {
